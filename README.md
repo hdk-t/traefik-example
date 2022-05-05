@@ -8,10 +8,10 @@ Example of load balancing and proxy using traefik container
 ### Starting web servers
     docker-compose -f ./web/docker-compose.yml up -d
 ### Access traefik dashboard
-    [traefik dashboard](http://traefik.localhost)
+[traefik dashboard](http://traefik.localhost)
 ### Access nginx
-    [nginx](http://localhost/nginx)
+[nginx](http://localhost/nginx)
 ### Access apache
-    [apache](http://localhost/apache)
+[apache](http://localhost/apache)
 ### Scale up nginx to 3
     docker-compose -f ./web/docker-compose.yml scale nginx=3
