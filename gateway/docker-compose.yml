@@ -1,0 +1,28 @@
+version: '3'
+networks:
+  traefik_example_network:
+    external: true
+services:
+  traefik:
+    image: traefik:v2.6.1
+    restart: always
+    environment:
+      - TZ=Japan
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp 
+        mode: host
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik_example_network
+    volumes:
+      - ./logs:/var/logs
+      - ./traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro,cached
+    labels:
+      ### traefik configration
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=(Host(`traefik.localhost`))
+      - traefik.http.routers.dashboard.service=api@internal

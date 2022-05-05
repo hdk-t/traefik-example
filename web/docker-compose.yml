@@ -1,0 +1,29 @@
+version: '3'
+networks:
+  traefik_example_network:
+    external: true
+services:
+  nginx:
+    image: nginx
+    restart: always
+    networks: 
+      - traefik_example_network
+    labels:
+      ### traefik configration
+      - traefik.enable=true
+      - traefik.http.routers.nginx.rule=PathPrefix(`/nginx`)
+      - traefik.http.services.nginx.loadbalancer.server.port=80
+      - traefik.http.middlewares.nginx-omitprefix.stripprefix.prefixes=/nginx
+      - traefik.http.routers.nginx.middlewares=nginx-omitprefix
+  apache:
+    image: httpd
+    restart: always
+    networks:
+      - traefik_example_network
+    labels:
+      ### traefik configration
+      - traefik.enable=true
+      - traefik.http.routers.apache.rule=PathPrefix(`/apache`)
+      - traefik.http.services.apache.loadbalancer.server.port=80
+      - traefik.http.middlewares.apache-omitprefix.stripprefix.prefixes=/apache
+      - traefik.http.routers.apache.middlewares=apache-omitprefix
