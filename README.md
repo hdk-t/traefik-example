@@ -1,4 +1,6 @@
 # TRAEFIK EXAMPLE
+![Architecture diagram](https://user-images.githubusercontent.com/71418821/167065540-820399d9-e70d-4317-bd8b-51ba320153b4.png)
+
 Example of load balancing and proxy using traefik container
 ## SET UP
 ### Create network
